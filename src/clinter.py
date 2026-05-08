@@ -24,12 +24,23 @@ def filepath(filepath: str):
     else:
         raise argparse.ArgumentTypeError(f"Invalid path: {filepath}")
 
+# Run all steps in a class
+def runall(skill_instance):
+    attrs = (getattr(skill_instance, name) for name in dir(skill_instance) if name != '__init__')
+    funcs = filter(inspect.ismethod, attrs)
+    for func in funcs:
+        try:
+            func()
+        except Exception as e:
+            print(f"Error: {e}")
+
 def main():
     parsed_args = parse_arguments()
     print(parsed_args)
 
-    # Run all linting steps using introspection
+    # Run all linting steps
     skill = Skill(filepath=parsed_args.file)
+    runall(skill)
 
 if __name__ == "__main__":
     main()
