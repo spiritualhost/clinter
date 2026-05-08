@@ -56,7 +56,8 @@ class Skill:
                         print(f"{sys._getframe().f_code.co_name}: line {index}: name provided not kebab case.")
                         lint = 1
                         pass   
-
+                    
+                    # If name doesn't match skill folder name
                     if name_slice != os.path.basename(self.skillfolder):
                         print(f"{sys._getframe().f_code.co_name}: line {index}: name provided doesn't match skill folder name.")
                         lint = 1
@@ -64,11 +65,31 @@ class Skill:
                     
             elif index == 2:
                 if "description" not in line:
-                    print(f"{sys._getframe().f_code.co_name}: line {index} needs 'description' field.")
+                    print(f"{sys._getframe().f_code.co_name}: line {index}: needs 'description' field.")
                     lint = 1
                     pass
 
-        return True if lint == 0 else False
+                else:
+                    description_slice = line[line.find(' ') + 1:]
+                    print(description_slice)
+
+                    # Is it possible to check for what the skill does / when to use it here? might require some fuzzy guessing....
+
+                    # See Complete Guide to Building a Skill for Claude Code
+                    if len(description_slice) > 1024:
+                        print(f"{sys._getframe().f_code.co_name}: line {index}: description must be under 1024 characters.")
+                        lint = 1
+                        pass
+
+                    # Check for XML tags
+                    if "<" in description_slice or ">" in description_slice:
+                        print(f"{sys._getframe().f_code.co_name}: line {index}: XML tags present in description.")
+                        lint = 1
+                        pass                 
+                    
+                    # Is it possible to check for specific tasks users might say, check for relevant file types?
+
+        return True if not lint else False
 
         
             
