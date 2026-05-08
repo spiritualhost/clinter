@@ -1,5 +1,6 @@
 # Linter for Claude skills
-import argparse, os
+import argparse, os, inspect
+from validate import *
 
 def parse_arguments():
     parser = argparse.ArgumentParser()
@@ -9,7 +10,8 @@ def parse_arguments():
 # Validate extensions
 def filename_validate(desired_name: str, desired_ext: str, filepath: str) -> bool:
     name, extension = os.path.splitext(filepath)
-    return True if extension == desired_ext and name == desired_name else False
+    filename_only = os.path.splitext(os.path.basename(filepath))[0]
+    return True if extension == desired_ext and filename_only == desired_name else False
 
 # Validate filepaths
 def filepath(filepath: str):
@@ -25,6 +27,9 @@ def filepath(filepath: str):
 def main():
     parsed_args = parse_arguments()
     print(parsed_args)
+
+    # Run all linting steps using introspection
+    skill = Skill(filepath=parsed_args.file)
 
 if __name__ == "__main__":
     main()
