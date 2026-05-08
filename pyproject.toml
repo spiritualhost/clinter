@@ -1,0 +1,9 @@
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project]
+name = "clinter"
+version = "0.1.0"
+
+[project.scripts]
+clinter = "clinter.clinter:main"

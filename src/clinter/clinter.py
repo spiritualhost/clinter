@@ -1,10 +1,16 @@
 # Linter for Claude skills
-import argparse, os, inspect
-from validate import *
+import argparse, os, inspect, sys
+from clinter.validate import *
 
 def parse_arguments():
     parser = argparse.ArgumentParser()
     parser.add_argument('-f', '--file', type=filepath, help='provide a filepath to lint.') 
+    
+    # Return help if just function called
+    if len(sys.argv) == 1:
+        parser.print_help()
+        sys.exit(0)
+        
     return parser.parse_args()
 
 # Validate extensions
@@ -39,7 +45,6 @@ def runall(skill_instance):
 
 def main():
     parsed_args = parse_arguments()
-    print(parsed_args)
 
     # Run all linting steps
     skill = Skill(filepath=parsed_args.file)

@@ -95,7 +95,3 @@ class Skill:
                     # Is it possible to check for specific tasks users might say, check for relevant file types?
 
         return True if not lint else False
-
-        
-            
-

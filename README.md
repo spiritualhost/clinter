@@ -8,7 +8,39 @@ Claude skills require a specific format in their `SKILL.MD` file in order to pro
 
 See the Complete Guide to Writing Claude Skills below to see a comprehensive list of steps this linter takes to ensure proper formatting (page 10).
 
+## Setup
 
+Dependencies: Python 3
+
+### Windows
+
+Set up pipx and setuptools:
+
+```powershell
+pip install pipx setuptools
+pipx ensurepath
+```
+
+Close the terminal window, then run:
+
+```powershell
+git clone https://github.com/spiritualhost/clinter.git
+cd clinter
+pipx install .
+pipx ensurepath
+```
+
+## Invocation
+
+```powershell
+
+```
+
+## Removal
+
+```powershell
+pipx uninstall clinter
+```
 
 ## Resources
 
