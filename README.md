@@ -33,7 +33,7 @@ pipx ensurepath
 ## Invocation
 
 ```powershell
-
+clinter -f {path/to/SKILL.md}
 ```
 
 ## Removal
