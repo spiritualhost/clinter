@@ -1,8 +1,30 @@
 # Linter for Claude skills
 import argparse, os
 
-parser = argparse.ArgumentParser()
-parser.parse_args()
+def parse_arguments():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-f', '--file', type=filepath, help='provide a filepath to lint.') 
+    return parser.parse_args()
+
+# Validate extensions
+def filename_validate(desired_name: str, desired_ext: str, filepath: str) -> bool:
+    name, extension = os.path.splitext(filepath)
+    return True if extension == desired_ext and name == desired_name else False
+
+# Validate filepaths
+def filepath(filepath: str):
+    if os.path.isfile(filepath):
+        if filename_validate("SKILL", ".md", filepath):
+            return filepath
+        else:
+            print("Error: bad filename")
+            os._exit(1)
+    else:
+        raise argparse.ArgumentTypeError(f"Invalid path: {filepath}")
+
+def main():
+    parsed_args = parse_arguments()
+    print(parsed_args)
 
 if __name__ == "__main__":
-    print("Test")
+    main()
