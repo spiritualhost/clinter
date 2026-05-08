@@ -18,7 +18,7 @@ class Skill:
         # Get just the folder's name, not the full path
         skill_folder = os.path.basename(self.skillfolder) 
 
-        # Verify with regex: starts and ends with lowercase/digit, allows hyphens in between
+        # Verify with regex: starts and ends with lowercase/digit, allows hyphens in between -- this could be cleaned up, used multiple times
         kebab_pattern = r'^[a-z0-9]+(-[a-z0-9]+)*$'
         return bool(re.match(kebab_pattern, skill_folder))
 
@@ -36,16 +36,32 @@ class Skill:
             
             if index == 0 or index == 3:
                 if line != "---":
-                    print(f"{sys._getframe().f_code.co_name}: line {index} needs \'---\'")
+                    print(f"{sys._getframe().f_code.co_name}: line {index}: needs \'---\'")
                     lint = 1
                     pass
             
             elif index == 1:
                 if "name" not in line:
-                    print(f"{sys._getframe().f_code.co_name}: line {index} needs 'name' field.")
+                    print(f"{sys._getframe().f_code.co_name}: line {index}: needs 'name' field.")
                     lint = 1
                     pass
-            
+
+                else:
+                    # Check that provided name is kebab case and matches folder name 
+                    name_slice = line[line.find(' ') + 1:]
+
+                    # Verify with regex: starts and ends with lowercase/digit, allows hyphens in between -- this could be cleaned up, used multiple times
+                    kebab_pattern = r'^[a-z0-9]+(-[a-z0-9]+)*$'
+                    if not bool(re.match(kebab_pattern, name_slice)):
+                        print(f"{sys._getframe().f_code.co_name}: line {index}: name provided not kebab case.")
+                        lint = 1
+                        pass   
+
+                    if name_slice != os.path.basename(self.skillfolder):
+                        print(f"{sys._getframe().f_code.co_name}: line {index}: name provided doesn't match skill folder name.")
+                        lint = 1
+                        pass
+                    
             elif index == 2:
                 if "description" not in line:
                     print(f"{sys._getframe().f_code.co_name}: line {index} needs 'description' field.")
