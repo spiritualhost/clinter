@@ -27,12 +27,14 @@ def filepath(filepath: str):
 # Run all steps in a class
 def runall(skill_instance):
     attrs = (getattr(skill_instance, name) for name in dir(skill_instance) if name != '__init__')
-    funcs = filter(inspect.ismethod, attrs)
-    for func in funcs:
+    methods = filter(inspect.ismethod, attrs)
+    for method in methods:
         try:
-            func()
+            response = method()
+            if not response:
+                print(f"Lint: method {method.__name__} returned need for linting.")
         except Exception as e:
-            print(f"Error: {e}")
+            print(f"Method error in {method}: {e}")
 
 def main():
     parsed_args = parse_arguments()
