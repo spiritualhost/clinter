@@ -63,6 +63,12 @@ class Skill:
                         lint = 1
                         pass
                     
+                    # Follow Anthropic rules around skill naming
+                    if "claude" in name_slice or "anthropic" in name_slice:
+                        print(f"{sys._getframe().f_code.co_name}: line {index}: name can't contain 'claude' or 'anthropic'.")
+                        lint = 1
+                        pass                        
+
             elif index == 2:
                 if "description" not in line:
                     print(f"{sys._getframe().f_code.co_name}: line {index}: needs 'description' field.")
@@ -71,7 +77,6 @@ class Skill:
 
                 else:
                     description_slice = line[line.find(' ') + 1:]
-                    print(description_slice)
 
                     # Is it possible to check for what the skill does / when to use it here? might require some fuzzy guessing....
 
