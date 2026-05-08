@@ -34,7 +34,8 @@ def runall(skill_instance):
             if not response:
                 print(f"Lint: method {method.__name__} returned need for linting.")
         except Exception as e:
-            print(f"Method error in {method}: {e}")
+            print(f"Method error in {method.__name__}: {e}")
+            os._exit(1)
 
 def main():
     parsed_args = parse_arguments()
