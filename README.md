@@ -30,15 +30,35 @@ pipx install .
 pipx ensurepath
 ```
 
+### Arch
+
+Set up pipx and setuptools:
+
+```bash
+sudo pacman -S python-pipx python-setuptools
+pipx ensurepath
+exec $SHELL
+```
+
+Get the program set up:
+
+```bash
+git clone https://github.com/spiritualhost/clinter.git
+cd clinter
+pipx install .
+pipx ensurepath
+exec $SHELL
+```
+
 ## Invocation
 
-```powershell
+```bash
 clinter -f {path/to/SKILL.md}
 ```
 
 ## Removal
 
-```powershell
+```bash
 pipx uninstall clinter
 ```
 
