@@ -52,8 +52,16 @@ exec $SHELL
 
 ## Invocation
 
+### Single File
+
 ```bash
 clinter -f {path/to/SKILL.md}
+```
+
+### Full Directory
+
+```bash
+grep -rl " " --include="SKILL.md" | xargs -I{} clinter -f {}
 ```
 
 ## Removal
