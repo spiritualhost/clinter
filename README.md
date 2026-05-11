@@ -77,6 +77,11 @@ git pull
 pipx uninstall clinter
 ```
 
+## Future Improvements
+
+* Handling of multi-line descriptions
+* Handling of optional fields in frontmatter
+
 ## Resources
 
 * [Complete Guide to Writing Claude Skills](https://resources.anthropic.com/hubfs/The-Complete-Guide-to-Building-Skill-for-Claude.pdf)
