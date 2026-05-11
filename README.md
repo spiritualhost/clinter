@@ -26,7 +26,7 @@ Close the terminal window, then run:
 ```powershell
 git clone https://github.com/spiritualhost/clinter.git
 cd clinter
-pipx install .
+pipx install --editable .
 pipx ensurepath
 ```
 
@@ -45,7 +45,7 @@ Get the program set up:
 ```bash
 git clone https://github.com/spiritualhost/clinter.git
 cd clinter
-pipx install .
+pipx install --editable .
 pipx ensurepath
 exec $SHELL
 ```
@@ -62,6 +62,13 @@ clinter -f {path/to/SKILL.md}
 
 ```bash
 grep -rl " " --include="SKILL.md" | xargs -I{} clinter -f {}
+```
+
+## Updates
+
+```bash
+cd clinter
+git pull
 ```
 
 ## Removal
