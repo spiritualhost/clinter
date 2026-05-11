@@ -12,6 +12,8 @@ class Skill:
             for line in file:
                 content.append(line.strip())
         self.content = content
+
+        print(f"Linting {self.filepath}")
     
     # Check that the skill folder is in kebab-case
     def folder_name(self) -> bool:
